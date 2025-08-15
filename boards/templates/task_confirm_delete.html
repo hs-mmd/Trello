@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+{% block title %}Delete Task: {{ task.title }}{% endblock %}
+{% block content %}
+<h1>Delete Task: {{ task.title }}</h1>
+<p>Are you sure you want to delete this task?</p>
+<form method="post">
+  {% csrf_token %}
+  <button class="btn btn-danger">Yes, delete</button>
+  <a href="{% url 'task_list' workspace.pk board.pk %}" class="btn btn-secondary">Cancel</a>
+</form>
+{% endblock %}

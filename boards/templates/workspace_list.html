@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+{% block title %} Your Workspaces {% endblock%}
+{% block content %}
+<h1>Your Workspaces</h1>
+<a href="{% url 'workspace_create' %}" class="btn btn-primary mb-3">New Workspace</a>
+<ul>
+  {% for ws in workspaces %}
+    <li><a href="{% url 'workspace_detail' ws.pk %}">{{ ws.name }}</a></li>
+  {% empty %}
+    <li>You have no workspaces yet.</li>
+  {% endfor %}
+</ul>
+{% endblock %}

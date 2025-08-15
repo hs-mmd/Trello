@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+{% block title %}Dashboard{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+  <h2>Dashboard for Board: {{ board.title }}</h2>
+
+  <div class="my-4">
+    <h5>Project Progress</h5>
+    <div class="progress" style="height: 25px;">
+      <div class="progress-bar" role="progressbar" style="width: {{ progress_percent }}%;" aria-valuenow="{{ progress_percent }}" aria-valuemin="0" aria-valuemax="100">
+        {{ progress_percent }}%
+      </div>
+    </div>
+  </div>
+
+  <div class="alert alert-info mt-4">
+    <strong>{{ monthly_tasks_due }}</strong> task(s) are due this month.
+  </div>
+
+  <div class="mt-5">
+    <h5>Completed Tasks by Day</h5>
+    {% if done_tasks_by_day %}
+      <table class="table table-bordered mt-2">
+        <thead>
+          <tr>
+            <th>Date</th>
+            <th>Number of Completed Tasks</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for item in done_tasks_by_day %}
+            <tr>
+              <td>{{ item.day }}</td>
+              <td>{{ item.count }}</td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    {% else %}
+      <p>No completed tasks yet.</p>
+    {% endif %}
+  </div>
+</div>
+{% endblock %}

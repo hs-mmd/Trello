@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+{% block title %}Tasks in {{ board.title }}{% endblock %}
+{% block content %}
+<h1>Tasks in {{ board.title }}</h1>
+
+{% if request.user == workspace.owner %}
+    <a href="{% url 'task_create' workspace_pk=workspace.pk board_pk=board.pk %}" class="btn btn-primary mb-3">New Task</a>
+{% endif%}
+
+<table class="table table-striped">
+  <thead>
+    <tr><th>Title</th><th>Status</th><th>Assignee</th><th>Tags</th><th>Due</th><th>Actions</th></tr>
+  </thead>
+  <tbody>
+    {% for task in tasks %}
+    <tr>
+      <td>{{ task.title }}</a></td>
+      <td>{{ task.get_status_display }}</td>
+      <td>{{ task.assignee.username }}</td>
+      <td>
+        {% for tag in task.tags.all %}
+          <span class="badge bg-secondary">{{ tag.name }}</span>
+        {% empty %}
+          &mdash;
+        {% endfor %}
+      </td> 
+      <td>{{ task.due_date|date:"Y-m-d" }}</td>
+      {% if request.user == workspace.owner %}
+        <td>
+          <a href="{% url 'task_update' workspace_pk=workspace.pk board_pk=board.pk pk=task.pk %}">Edit</a> |
+          <a href="{% url 'task_delete' workspace_pk=workspace.pk board_pk=board.pk pk=task.pk %}" class="text-danger">Delete</a>
+        </td>
+      {% endif%}
+
+    </tr>
+    {% empty %}
+    <tr><td colspan="5">No tasks yet.</td></tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endblock %}

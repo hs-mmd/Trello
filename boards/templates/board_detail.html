@@ -1,0 +1,7 @@
+{% extends 'base.html' %}
+{% block title %}Board: {{ board.title }}{% endblock %}
+{% block content %}
+<h1>{{ board.title }}</h1>
+<p>Workspace: <a href="{% url 'board_list' workspace_pk=workspace.pk %}">{{ workspace.name }}</a></p>
+<a href="{% url 'task_list' workspace_pk=workspace.pk board_pk=board.pk %}" class="btn btn-secondary mb-3">View Tasks</a>
+{% endblock %}

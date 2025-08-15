@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% block title %}Create Board in {{ workspace.name }}{% endblock %}
+{% block content %}
+<h1>Create Board in {{ workspace.name }}</h1>
+<form method="post">
+  {% csrf_token %}
+  {{ form.non_field_errors }}
+  <div class="mb-3">
+    {{ form.title.label_tag }}
+    {{ form.title }}
+    {{ form.title.errors }}
+  </div>
+  <button class="btn btn-success">Create Board</button>
+</form>
+{% endblock %}
