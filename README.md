@@ -1,1 +1,1 @@
-# Django-Trello
+# Implement Trello with Django
