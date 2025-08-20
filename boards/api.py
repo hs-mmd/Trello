@@ -22,7 +22,7 @@ class WorkspaceViewSet(viewsets.ModelViewSet):
 class BoardViewSet(viewsets.ModelViewSet):
     queryset = Board.objects.all()
     serializer_class = BoardSerializer
-    permission_classes = [permissions.IsAuthenticated]
+    permission_classes = [IsAuthenticated]
     
     def get_queryset(self):
         return Board.objects.filter(workspace__members=self.request.user)
@@ -31,7 +31,7 @@ class BoardViewSet(viewsets.ModelViewSet):
 class TagViewSet(viewsets.ModelViewSet):
     queryset = Tag.objects.all()
     serializer_class = TagSerializer
-    permission_classes = [permissions.IsAuthenticated]
+    permission_classes = [IsAuthenticated]
 
 
 class TaskViewSet(viewsets.ModelViewSet):
